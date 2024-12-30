@@ -1,12 +1,23 @@
 {
     "cSpell.words": [
+        "actix",
         "Actix",
+        "chrono",
         "dbname",
+        "dotenv",
         "dtos",
+        "jsonwebtoken",
         "MAXAGE",
+        "openssl",
+        "ossp",
+        "rapidoc",
+        "redoc",
+        "serde",
         "sqlx",
         "usuario",
         "utoipa",
+        "uuid",
+        "validacao",
         "validaemail"
     ]
 }

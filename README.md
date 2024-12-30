@@ -105,6 +105,38 @@ Certifique-se de ter as seguintes ferramentas instaladas:
     postgres_data:
 ```
 
+### Comando para rodar o Docker Compose
+
+```bash
+    docker-compose up -d
+```
+
+### Verificar se o contêiner está rodando
+
+```bash
+    docker ps
+```
+
+```bash
+    # Resultado da verificação do contêiner
+    CONTAINER ID   IMAGE            COMMAND                  PORTS                    NAMES
+    123456789abc   postgres:latest  "docker-entrypoint.s…"   0.0.0.0:5432->5432/tcp   postgres_local
+```
+
+### Parar o contêiner
+
+```bash
+    docker-compose down
+```
+
+### Remover o contêiner
+
+```bash
+    docker-compose stop
+```
+
+Agora você tem um ambiente PostgreSQL rodando localmente com Docker e Docker Compose. 🚀
+
 ### Explicação dos parâmetros referente container criado no DOCKER
 
 -   **image:** Define a imagem Docker do PostgreSQL. O latest sempre pega a versão mais recente.
