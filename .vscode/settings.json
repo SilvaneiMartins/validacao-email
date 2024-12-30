@@ -3,7 +3,10 @@
         "Actix",
         "dbname",
         "dtos",
+        "MAXAGE",
         "sqlx",
-        "utoipa"
+        "usuario",
+        "utoipa",
+        "validaemail"
     ]
 }

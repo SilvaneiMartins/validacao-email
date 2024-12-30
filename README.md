@@ -6,12 +6,13 @@
     API de autenticação Rust com Actix-Web
 </h4>
 
-## Índice do projeto
+## Índice do projeto 🥅
 
 -   [Visão geral do projeto](#project-overview)
 -   [Estrutura do Projeto](#project-structure)
 -   [Instruções de configuração](#setup-instructions)
     -   [Pré-requisitos](#prerequisites)
+    -   [Criando Container](#created-container)
     -   [Variáveis ​​de ambiente](#environment-variables)
     -   [Migrações de Banco de Dados](#database-migrations)
     -   [Executando o servidor](#running-the-server)
@@ -26,7 +27,7 @@
 -   [Licença](#license)
 -   [Contato](#contact)
 
-## Visão geral do projeto
+## Visão geral do projeto 🛰️
 
 Este repositório contém um projeto abrangente de API na linguagem Rust usando Actix-Web.
 A API inclui autenticação robusta baseada em JWT, gerenciamento de usuários e integração de Swagger UI para consultar a documentação interativa de API.
@@ -41,7 +42,7 @@ A API inclui autenticação robusta baseada em JWT, gerenciamento de usuários e
 -   **Documentação de API:** Interface de usuário Swagger integrada para documentação de API interativa.
 -   **Middleware:** Middleware personalizado para autenticação e controle de acesso baseado em função.
 
-## Estrutura do Projeto
+## Estrutura do Projeto 📝
 
 ```plaintext
 ├── src
@@ -69,7 +70,7 @@ A API inclui autenticação robusta baseada em JWT, gerenciamento de usuários e
 ├── README.md              # Documentação do projeto
 ```
 
-# Instruções de configuração
+# Instruções de configuração 📜
 
 ## Pré-requisitos
 
@@ -81,7 +82,42 @@ Certifique-se de ter as seguintes ferramentas instaladas:
 -   [Docker](https://www.docker.com/products/docker-desktop/)
 -   [SQLx-CLI](https://github.com/launchbadge/sqlx/tree/master/sqlx-cli) (para migrações de banco de dados)
 
-## Variáveis ​​de ambiente
+## Criando Container em DOCKER local
+
+```bash
+    version: '3.8'
+
+    services:
+    postgres:
+        image: postgres:latest
+        container_name: postgres_local
+        restart: always
+        ports:
+        - "5432:5432"
+        environment:
+        POSTGRES_USER: seu_usuario
+        POSTGRES_PASSWORD: sua_senha
+        POSTGRES_DB: seu_banco
+        volumes:
+        - postgres_data:/var/lib/postgresql/data
+
+    volumes:
+    postgres_data:
+```
+
+### Explicação dos parâmetros referente container criado no DOCKER
+
+-   **image:** Define a imagem Docker do PostgreSQL. O latest sempre pega a versão mais recente.
+-   **container_name:** Nome do contêiner para facilitar o gerenciamento.
+-   **restart:** Configura o contêiner para reiniciar automaticamente (opcional).
+-   **ports:** Mapeia a porta 5432 do contêiner para a porta 5432 do host (você pode alterar a porta externa, se necessário).
+-   **environment:** Define as variáveis de ambiente para configurar o banco:
+-   **POSTGRES_USER:** Nome do usuário.
+-   **POSTGRES_PASSWORD:** Senha do usuário.
+-   **POSTGRES_DB:** Nome do banco de dados.
+-   **volumes:** Permite persistir os dados localmente para que não sejam perdidos se o contêiner for reiniciado ou removido.
+
+## Variáveis ​​de ambiente 📃
 
 Crie um arquivo `.env` no diretório raiz com o seguinte conteúdo:
 
@@ -93,7 +129,7 @@ Crie um arquivo `.env` no diretório raiz com o seguinte conteúdo:
 
 Substitua os espaços reservados pelas suas credenciais reais do banco de dados e pela configuração desejada do JWT.
 
-## Migrações de Banco de Dados
+## Migrações de Banco de Dados 🧱
 
 Execute o seguinte comando para executar migrações de banco de dados:
 
@@ -103,7 +139,7 @@ Execute o seguinte comando para executar migrações de banco de dados:
 
 Isso configurará o esquema de banco de dados necessário para o aplicativo.
 
-## Executando o servidor
+## Executando o servidor 🌐
 
 Inicie o servidor usando o comando:
 
@@ -113,7 +149,7 @@ Inicie o servidor usando o comando:
 
 A API estará acessível no endereço: http://localhost:8000.
 
-## Endpoints da API
+## Endpoints da API 📂
 
 ### Endpoint de autenticação
 
@@ -128,7 +164,7 @@ A API estará acessível no endereço: http://localhost:8000.
 
 Cada endpoint de acesso é protegido por autenticação baseada em JWT, garantindo acesso seguro na API.
 
-## Swagger UI
+## Swagger UI 🗂️
 
 O Swagger UI é integrado para exploração e documentação interativa de API. Acesse-o navegando para:
 
@@ -138,7 +174,7 @@ O Swagger UI é integrado para exploração e documentação interativa de API. 
 
 Aqui, você pode visualizar todos os endpoints disponíveis, juntamente com informações detalhadas sobre formatos de solicitação e resposta.
 
-## Middleware
+## Middleware 🔒
 
 ### Authentication Middleware Guard
 
@@ -148,7 +184,7 @@ O middleware de autenticação personalizado guarda rotas verificando a presenç
 
 Além da autenticação, algumas rotas impõem controle de acesso baseado em função (RBAC) usando o middleware `RequireAuth`, que verifica funções de usuário como `Admin`, `Moderator` ou `User`.
 
-## Documentação OpenAPI
+## Documentação OpenAPI 🤖
 
 O projeto oferece suporte ao OpenAPI 3.0, com geração de esquema e documentação de endpoint fornecida por meio do pacote `utoipa`.
 
@@ -158,12 +194,11 @@ O projeto oferece suporte ao OpenAPI 3.0, com geração de esquema e documentaç
 -   **Registre o Manipulador de API como Caminho OpenAPI:** Cada manipulador é registrado como um caminho OpenAPI com descrições detalhadas.
 -   **Servindo a IU do Swagger:** O objeto OpenAPI é servido por meio de um servidor web, acessível por meio da IU do Swagger.
 
-
 ## Licença 📝
 
 Este projeto é licenciado sob [CC0 1.0 Universal]. Consulte o arquivo [LICENSE](https://github.com/SilvaneiMartins/validacao-email-rust/blob/master/LICENSE) para obter detalhes.
 
-## Doações
+## Doações 💰
 
 Se você achar este projeto útil e quiser apoiar seu desenvolvimento contínuo, você pode fazer uma doação via `PIX` para e-mail `silvaneimartins@hotmail.com`.
 
