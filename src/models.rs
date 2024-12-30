@@ -26,6 +26,7 @@ pub struct User {
     pub email: String,
     pub password: String,
     pub role: UserRole,
+    pub photo: String,
     pub verified: bool,
     #[serde(rename = "createdAt")]
     pub created_at: Option<DateTime<Utc>>,
