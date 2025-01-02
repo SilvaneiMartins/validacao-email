@@ -94,7 +94,7 @@ pub struct UserResponseDto {
 }
 
 #[derive(Debug, Serialize, Deserialize, ToSchema)]
-pub struct UsaerListResponseDto {
+pub struct UserListResponseDto {
     pub status: String,
     pub users: Vec<FilterUserDto>,
     pub results: usize,
