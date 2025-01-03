@@ -33,10 +33,17 @@ pub struct AppState {
     pub db_client: DBClient,
 }
 
+use handler::{auth as authHandler, users};
+
 #[derive(OpenApi)]
 #[openapi(
     paths(
-        heath_checker_handler
+        authHandler::login,
+        authHandler::logout,
+        authHandler::register,
+        users::get_me,
+        users::get_users,
+        heath_checker_handler,
     ),
     components(
         schemas(UserData,FilterUserDto,LoginUserDto,RegisterUserDto,UserResponseDto,UserLoginResponseDto,Response,UserListResponseDto)
@@ -119,6 +126,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             .app_data(web::Data::new(app_state.clone()))
             .wrap(cors)
             .wrap(Logger::default())
+            .service(handler::auth::auth_handler())
+            .service(handler::users::users_handler())
             .service(heath_checker_handler)
             .service(Redoc::with_url("/redoc", openapi.clone()))
             .service(RapiDoc::new("/api-docs/openai.json").path("/rapidoc"))
