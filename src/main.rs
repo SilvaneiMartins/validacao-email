@@ -54,6 +54,7 @@ use handler::{auth as authHandler, users};
 )]
 struct ApiDoc;
 
+#[allow(dead_code)]
 struct SecurityAddon;
 
 impl Modify for SecurityAddon {

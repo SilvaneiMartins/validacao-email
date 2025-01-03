@@ -1,8 +1,7 @@
+use crate::models::{User, UserRole};
 use async_trait::async_trait;
 use sqlx::{Pool, Postgres};
 use uuid::Uuid;
-
-use crate::models::{User, UserRole};
 
 #[derive(Debug, Clone)]
 pub struct DBClient {
@@ -33,6 +32,7 @@ pub trait UserExt {
         password: T,
     ) -> Result<User, sqlx::Error>;
 
+    #[allow(dead_code)]
     async fn save_admin_user<T: Into<String> + Send>(
         &self,
         name: T,
@@ -70,19 +70,21 @@ impl UserExt for DBClient {
                 email
             ).fetch_optional(&self.pool).await?;
         }
+
         Ok(user)
     }
 
     async fn get_users(&self, page: u32, limit: usize) -> Result<Vec<User>, sqlx::Error> {
         let offset = (page - 1) * limit as u32;
 
-        let  users = sqlx::query_as!(
+        let users = sqlx::query_as!(
             User,
             r#"SELECT id, name, email, password, photo, verified, created_at, updated_at, role as "role: UserRole" FROM users
             ORDER BY created_at DESC LIMIT $1 OFFSET $2"#,
             limit as i64,
-            offset as i64
-        ).fetch_all(&self.pool).await?;
+            offset as i64,
+        ).fetch_all(&self.pool)
+        .await?;
 
         Ok(users)
     }
@@ -99,7 +101,8 @@ impl UserExt for DBClient {
             name.into(),
             email.into(),
             password.into(),
-        ).fetch_one(&self.pool).await?;
+        ).fetch_one(&self.pool)
+        .await?;
 
         Ok(user)
     }
@@ -117,7 +120,9 @@ impl UserExt for DBClient {
             email.into(),
             password.into(),
             UserRole::Admin as UserRole,
-        ).fetch_one(&self.pool).await?;
+        )
+        .fetch_one(&self.pool)
+        .await?;
 
         Ok(user)
     }
