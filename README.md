@@ -6,6 +6,11 @@
     API de autenticação Rust com Actix-Web
 </h4>
 
+## Imagem do Projeto
+
+![Imagem do Projeto](./print/print1.png)
+![Imagem com Task](./print/print2.png)
+
 ## Índice do projeto 🥅
 
 -   [Visão geral do projeto](#project-overview)
